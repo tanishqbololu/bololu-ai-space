@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageCircle, X, Send, Bot, Sparkles } from 'lucide-react';
+import { MessageCircle, X, Send, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,16 +9,15 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
       type: 'bot',
-      content: "🚀 Hey there! I'm Tanishq's AI assistant. Ask me anything about his skills, projects, or experience!"
+      content: "👋 Hi! I'm Tanishq's AI assistant. Ask me about my skills, projects, or experience!"
     }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
 
   const quickQuestions = [
-    "What are your main AI skills?",
-    "Tell me about your best projects",
-    "What's your ML experience?",
+    "What are your main skills?",
+    "Tell me about your projects",
+    "What's your experience?",
     "How can I contact you?"
   ];
 
@@ -27,130 +26,98 @@ const Chatbot = () => {
 
     const userMessage = { type: 'user', content: inputValue };
     setMessages(prev => [...prev, userMessage]);
-    setIsTyping(true);
 
-    // Enhanced bot responses
+    // Simple bot responses
     const responses = {
-      skills: "🧠 I specialize in Machine Learning, Deep Learning, Computer Vision, and NLP. My tech arsenal includes Python, TensorFlow, PyTorch, OpenCV, YOLOv8, and cloud platforms like AWS and Azure. I'm particularly strong in neural networks and real-time AI systems!",
-      projects: "🎯 My standout projects include a Real-Time Object Detection System using YOLOv8, an AI-powered Customer Churn Prediction platform, and an Intelligent Text Summarizer with NLP. Each project showcases different aspects of AI - from computer vision to predictive analytics!",
-      experience: "💼 I've gained valuable experience through Tata Group's Data Visualization program and various cutting-edge ML/AI projects. I'm Google Data Analytics certified and achieved IELTS Band 7.5. Currently working on revolutionary AI solutions that push the boundaries of technology!",
-      contact: "📧 Ready to collaborate? Reach me at tanishqbololu@gmail.com or +91 9764029249. Based in Hyderabad, India, and always excited about new AI opportunities and innovative projects!"
+      skills: "I specialize in Machine Learning, Deep Learning, Computer Vision, and NLP. My tech stack includes Python, TensorFlow, PyTorch, OpenCV, and cloud platforms like AWS and Azure.",
+      projects: "I've worked on exciting projects like Real-Time Object Detection with YOLOv8, Customer Churn Prediction using ANNs, and Intelligent Text Summarizers with NLP. Check out the Projects section for more details!",
+      experience: "I have experience with Tata Group's Data Visualization program and have completed various ML/AI projects. I'm also Google Data Analytics certified and hold an IELTS Band 7.5.",
+      contact: "You can reach me at tanishqbololu@gmail.com or +91 9764029249. I'm based in Hyderabad, India and always open to new opportunities!"
     };
 
-    let botResponse = "🤔 That's a fascinating question! Feel free to explore my portfolio sections above to dive deeper into my AI and machine learning expertise. What specific area interests you most?";
+    let botResponse = "That's an interesting question! Feel free to explore my portfolio sections above to learn more about my work in AI and machine learning.";
 
-    if (inputValue.toLowerCase().includes('skill') || inputValue.toLowerCase().includes('ai') || inputValue.toLowerCase().includes('tech')) {
+    if (inputValue.toLowerCase().includes('skill')) {
       botResponse = responses.skills;
-    } else if (inputValue.toLowerCase().includes('project') || inputValue.toLowerCase().includes('work') || inputValue.toLowerCase().includes('portfolio')) {
+    } else if (inputValue.toLowerCase().includes('project')) {
       botResponse = responses.projects;
-    } else if (inputValue.toLowerCase().includes('experience') || inputValue.toLowerCase().includes('background') || inputValue.toLowerCase().includes('career')) {
+    } else if (inputValue.toLowerCase().includes('experience') || inputValue.toLowerCase().includes('work')) {
       botResponse = responses.experience;
-    } else if (inputValue.toLowerCase().includes('contact') || inputValue.toLowerCase().includes('email') || inputValue.toLowerCase().includes('hire')) {
+    } else if (inputValue.toLowerCase().includes('contact') || inputValue.toLowerCase().includes('email')) {
       botResponse = responses.contact;
     }
 
     setTimeout(() => {
-      setIsTyping(false);
       setMessages(prev => [...prev, { type: 'bot', content: botResponse }]);
-    }, 1500);
+    }, 1000);
 
     setInputValue('');
   };
 
   const handleQuickQuestion = (question: string) => {
     setInputValue(question);
-    setTimeout(() => handleSendMessage(), 100);
+    handleSendMessage();
   };
 
   return (
     <>
-      {/* Enhanced Chat Button */}
+      {/* Chat Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent hover:scale-110 transition-all duration-500 shadow-glow animate-pulse-glow futuristic-border group"
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-primary to-accent hover:scale-110 transition-transform duration-300 shadow-lg animate-pulse-glow"
         >
-          <div className="relative">
-            {isOpen ? (
-              <X className="w-6 h-6 transition-transform duration-300 group-hover:rotate-90" />
-            ) : (
-              <>
-                <MessageCircle className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
-                <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-accent animate-pulse" />
-              </>
-            )}
-          </div>
+          {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
         </Button>
       </div>
 
-      {/* Enhanced Chat Window */}
+      {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-28 right-6 w-96 max-w-[calc(100vw-3rem)] z-50 animate-slide-in-right">
-          <Card className="card-futuristic border-primary/30 holographic">
-            <CardHeader className="pb-3 bg-gradient-to-r from-primary via-accent to-primary bg-size-200 text-white rounded-t-lg holographic">
+        <div className="fixed bottom-24 right-6 w-80 max-w-[calc(100vw-3rem)] z-50 animate-slide-in-right">
+          <Card className="card-elevated border-primary/20">
+            <CardHeader className="pb-3 bg-gradient-to-r from-primary to-accent text-white rounded-t-lg">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-pulse-glow">
-                  <Bot className="w-5 h-5" />
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <Bot className="w-4 h-4" />
                 </div>
                 <div>
-                  <CardTitle className="text-base font-semibold">AI Assistant</CardTitle>
-                  <p className="text-sm opacity-90 flex items-center">
-                    <Sparkles className="w-3 h-3 mr-1" />
-                    Tanishq's Portfolio Guide
-                  </p>
-                </div>
-                <div className="ml-auto">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <CardTitle className="text-sm">AI Assistant</CardTitle>
+                  <p className="text-xs opacity-90">Ask about Tanishq's portfolio</p>
                 </div>
               </div>
             </CardHeader>
             
-            <CardContent className="p-0 bg-card/95 backdrop-blur-md">
+            <CardContent className="p-0">
               {/* Messages */}
-              <div className="h-80 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-primary/20">
+              <div className="h-64 overflow-y-auto p-4 space-y-3">
                 {messages.map((message, index) => (
                   <div
                     key={index}
-                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[85%] p-3 rounded-2xl text-sm transition-all duration-300 hover:scale-105 ${
+                      className={`max-w-[80%] p-3 rounded-lg text-sm ${
                         message.type === 'user'
-                          ? 'bg-gradient-to-r from-primary to-accent text-white shadow-glow'
-                          : 'bg-muted/70 text-foreground border border-border/20 hover:bg-muted'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted text-muted-foreground'
                       }`}
                     >
                       {message.content}
                     </div>
                   </div>
                 ))}
-                
-                {/* Typing Indicator */}
-                {isTyping && (
-                  <div className="flex justify-start animate-fade-in-up">
-                    <div className="bg-muted/70 p-3 rounded-2xl border border-border/20">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" />
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Quick Questions */}
               {messages.length === 1 && (
-                <div className="p-4 border-t border-border/20 bg-muted/30">
-                  <p className="text-xs text-muted-foreground mb-3 font-medium">Quick questions:</p>
-                  <div className="space-y-2">
+                <div className="p-4 border-t border-border/20">
+                  <p className="text-xs text-muted-foreground mb-2">Quick questions:</p>
+                  <div className="space-y-1">
                     {quickQuestions.map((question, index) => (
                       <button
                         key={index}
                         onClick={() => handleQuickQuestion(question)}
-                        className="w-full text-left p-3 text-xs bg-card/50 hover:bg-primary/10 hover:text-primary rounded-lg border border-border/20 transition-all duration-300 hover:scale-105 animate-fade-in-up"
-                        style={{ animationDelay: `${index * 0.1}s` }}
+                        className="w-full text-left p-2 text-xs hover:bg-muted/50 rounded transition-colors duration-200"
                       >
                         {question}
                       </button>
@@ -159,21 +126,20 @@ const Chatbot = () => {
                 </div>
               )}
 
-              {/* Enhanced Input */}
-              <div className="p-4 border-t border-border/20 bg-muted/20">
+              {/* Input */}
+              <div className="p-4 border-t border-border/20">
                 <div className="flex space-x-2">
                   <Input
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Ask me anything about AI..."
-                    className="text-sm bg-card/50 border-border/30 focus:border-primary transition-all duration-300"
+                    placeholder="Ask me anything..."
+                    className="text-sm"
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   />
                   <Button
                     onClick={handleSendMessage}
                     size="sm"
-                    className="bg-gradient-to-r from-primary to-accent hover:scale-110 transition-all duration-300 shadow-glow"
-                    disabled={isTyping || !inputValue.trim()}
+                    className="bg-primary hover:bg-primary-dark"
                   >
                     <Send className="w-4 h-4" />
                   </Button>

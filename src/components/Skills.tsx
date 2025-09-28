@@ -76,19 +76,19 @@ const Skills = () => {
         {/* Technical Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {skillCategories.map((category, index) => (
-            <Card key={index} className="card-elevated group">
+            <Card key={index} className="card-futuristic group perspective-1000">
               <CardHeader className="pb-4">
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 group-hover:rotate-y-12 transition-all duration-500 transform-style-3d`}>
                   {category.icon}
                 </div>
-                <CardTitle className="text-xl">{category.title}</CardTitle>
+                <CardTitle className="text-xl group-hover:text-holographic transition-all duration-300">{category.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-primary rounded-full" />
-                      <span className="text-muted-foreground">{skill}</span>
+                    <div key={skillIndex} className="flex items-center space-x-2 group-hover:translate-x-2 transition-transform duration-300" style={{ transitionDelay: `${skillIndex * 50}ms` }}>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse-glow" />
+                      <span className="text-muted-foreground hover:text-foreground transition-colors duration-200">{skill}</span>
                     </div>
                   ))}
                 </div>
@@ -102,8 +102,8 @@ const Skills = () => {
           <h3 className="text-2xl font-semibold mb-8">Soft Skills</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {softSkills.map((skill, index) => (
-              <div key={index} className="card-glass px-6 py-4 rounded-full flex items-center space-x-2 hover:bg-white/10 transition-all duration-300">
-                <div className="text-primary">
+              <div key={index} className="card-glass px-6 py-4 rounded-full flex items-center space-x-2 hover:bg-card/80 hover:scale-110 hover:shadow-glow transition-all duration-500 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="text-primary animate-pulse-glow">
                   {skill.icon}
                 </div>
                 <span className="text-foreground font-medium">{skill.name}</span>

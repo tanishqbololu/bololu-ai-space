@@ -56,24 +56,24 @@ const Projects = () => {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <Card key={index} className="card-elevated group overflow-hidden">
+            <Card key={index} className="card-futuristic group overflow-hidden perspective-1000">
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.gradient} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.gradient} flex items-center justify-center text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}>
                     {project.icon}
                   </div>
-                  <div className="flex space-x-2">
-                    <Button size="sm" variant="outline" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <Button size="sm" variant="outline" className="hover:bg-primary hover:text-primary-foreground border-primary/30">
                       <Github className="w-4 h-4 mr-1" />
                       Code
                     </Button>
-                    <Button size="sm" variant="outline" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button size="sm" variant="outline" className="hover:bg-accent hover:text-accent-foreground border-accent/30">
                       <ExternalLink className="w-4 h-4 mr-1" />
                       Demo
                     </Button>
                   </div>
                 </div>
-                <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
+                <CardTitle className="text-xl group-hover:text-holographic transition-all duration-300">
                   {project.title}
                 </CardTitle>
               </CardHeader>
